@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#255e49">
+  <meta name="description" content="Academia gratuita de portugués europeo y gallego: ejercicios, exámenes, listening, speaking y progreso local de A1 a C2.">
+  <title>Línguas — Academia de idiomas</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Línguas, inicio"><span class="brand-mark">á</span><span>línguas <small>/ tu academia</small></span></a>
+    <div class="top-actions"><span class="save-status" id="saveStatus">● Progreso guardado en este navegador</span><button class="button button-quiet" id="exportProgress">Exportar progreso</button></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-caption">TU ACADEMIA</div>
+      <button class="nav-item active" data-view="home"><span>⌂</span> Inicio</button>
+      <button class="nav-item" data-view="practice"><span>▤</span> Ejercicios</button>
+      <button class="nav-item" data-view="exam"><span>✓</span> Exámenes</button>
+      <button class="nav-item" data-view="listening"><span>◖</span> Listening</button>
+      <button class="nav-item" data-view="speaking"><span>◉</span> Speaking</button>
+      <button class="nav-item" data-view="progress"><span>↗</span> Mi progreso</button>
+      <div class="sidebar-note"><strong>Sem subir a présa.</strong><br>Un paso cada día. El progreso se guarda localmente y no necesita cuenta ni servidor.</div>
+    </aside>
+    <main>
+      <section class="view active" id="view-home">
+        <div class="welcome-row"><div><p class="eyebrow">Ola! · Olá!</p><h1>Tu próxima palabra<br>abre otra puerta.</h1><p class="muted">Portugués europeo y gallego, de A1 a C2.</p></div><div class="date-pill" id="todayLabel"></div></div>
+        <section class="hero">
+          <div><span class="hero-tag">✦ sesión de hoy</span><h2>¿Qué quieres practicar hoy?</h2><p>Elige idioma, nivel y actividad. Haz ejercicios, examínate y entrena el oído y la pronunciación.</p><button class="button button-lime" id="startRecommended">Empezar sesión recomendada →</button></div>
+          <div class="hero-illustration" aria-hidden="true"><span class="hero-orb">á</span><span class="floating floating-a">Olá, tudo bem?</span><span class="floating floating-b">Bo día!</span></div>
+        </section>
+        <div class="section-heading"><h2>Elige tus lenguas</h2><span class="muted small">Puedes seleccionar una o ambas</span></div>
+        <div class="language-grid">
+          <button class="language-card selected" data-language="pt"><span class="language-emoji">🇵🇹</span><span class="language-check">✓</span><strong>Português europeu</strong><small>La variedad de Portugal</small><span class="language-progress"><span id="ptHomeLevel">A1</span><span id="ptHomePct">0%</span></span><span class="progress-track"><span id="ptHomeBar"></span></span></button>
+          <button class="language-card" data-language="gl"><span class="language-emoji">🌿</span><span class="language-check">✓</span><strong>Galego</strong><small>A lingua de Galicia</small><span class="language-progress"><span id="glHomeLevel">A1</span><span id="glHomePct">0%</span></span><span class="progress-track"><span id="glHomeBar"></span></span></button>
+        </div>
+        <div class="config-panel">
+          <div class="field"><label for="homeLevel">Nivel</label><select id="homeLevel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select></div>
+          <div class="field"><label for="homeActivity">Actividad</label><select id="homeActivity"><option value="mixed">Práctica mixta</option><option value="vocab">Vocabulario</option><option value="grammar">Gramática y uso</option><option value="reading">Comprensión lectora</option><option value="listening">Listening</option><option value="speaking">Speaking</option></select></div>
+          <button class="button button-primary" id="startHomeActivity">Empezar</button>
+        </div>
+        <div class="dashboard-grid">
+          <section class="panel"><div class="section-heading tight"><h2>Entrena una destreza</h2><span class="muted small">A1–C2</span></div>
+            <div class="skill-row"><span class="skill-icon peach">▣</span><div class="skill-copy"><strong>Ejercicios</strong><small>Preguntas con corrección explicada</small></div><button class="button button-small" data-launch="practice">Abrir</button></div>
+            <div class="skill-row"><span class="skill-icon lavender">✓</span><div class="skill-copy"><strong>Exámenes</strong><small>Prueba de hasta 10 preguntas y puntuación</small></div><button class="button button-small" data-launch="exam">Examinarme</button></div>
+            <div class="skill-row"><span class="skill-icon mint">◖</span><div class="skill-copy"><strong>Listening</strong><small>Escucha una frase y responde</small></div><button class="button button-small" data-launch="listening">Escuchar</button></div>
+            <div class="skill-row"><span class="skill-icon blue">◉</span><div class="skill-copy"><strong>Speaking</strong><small>Habla en voz alta o grábate en el navegador</small></div><button class="button button-small" data-launch="speaking">Hablar</button></div>
+          </section>
+          <section class="panel"><div class="section-heading tight"><h2>Tu progreso</h2><button class="text-button" data-view="progress">Ver detalle ↗</button></div>
+            <div class="stats-grid"><div class="stat"><strong id="statSessions">0</strong><small>sesiones</small></div><div class="stat"><strong id="statAccuracy">—</strong><small>aciertos</small></div><div class="stat"><strong id="statMinutes">0</strong><small>minutos</small></div><div class="stat"><strong id="statStreak">0</strong><small>días de racha</small></div></div>
+            <div class="daily-tip"><strong>✨ Tu objetivo</strong><span>Haz una sesión breve. Los resultados se guardarán en este navegador y te ayudarán a decidir qué nivel practicar después.</span></div>
+          </section>
+        </div>
+      </section>
+      <section class="view" id="view-practice">
+        <div class="view-heading"><div><p class="eyebrow">Práctica guiada</p><h1>Ejercicios</h1><p class="muted">Entrena una habilidad y recibe una explicación después de cada respuesta.</p></div></div>
+        <div class="config-panel"><div class="field"><label for="practiceLang">Idioma</label><select id="practiceLang"><option value="pt">Português europeu</option><option value="gl">Galego</option><option value="both">Ambos, alternando</option></select></div><div class="field"><label for="practiceLevel">Nivel</label><select id="practiceLevel"></select></div><div class="field"><label for="practiceType">Tipo</label><select id="practiceType"><option value="mixed">Mixto</option><option value="vocab">Vocabulario</option><option value="grammar">Gramática y uso</option><option value="reading">Comprensión lectora</option></select></div><button class="button button-primary" id="beginPractice">Generar ejercicios</button></div>
+      </section>
+      <section class="view" id="view-exam">
+        <div class="view-heading"><div><p class="eyebrow">Comprueba lo que sabes</p><h1>Exámenes</h1><p class="muted">Pruebas de hasta 10 preguntas, según las preguntas disponibles para el nivel. El resultado queda registrado en tu historial local.</p></div></div>
+        <div class="config-panel"><div class="field"><label for="examLang">Idioma</label><select id="examLang"><option value="pt">Português europeu</option><option value="gl">Galego</option></select></div><div class="field"><label for="examLevel">Nivel del examen</label><select id="examLevel"></select></div><div class="field"><label for="examType">Contenido</label><select id="examType"><option value="mixed">Examen completo</option><option value="vocab">Vocabulario</option><option value="grammar">Gramática y uso</option><option value="reading">Comprensión lectora</option></select></div><button class="button button-primary" id="beginExam">Empezar examen</button></div>
+        <div class="info-panel"><strong>Cómo funciona</strong><p>Contesta sin ayuda y revisa las explicaciones al finalizar. El banco inicial es una base ampliable: las pruebas se generan a partir de las preguntas disponibles para cada idioma y nivel.</p></div>
+      </section>
+      <section class="view" id="view-listening">
+        <div class="view-heading"><div><p class="eyebrow">Comprensión oral</p><h1>Listening / Escoita</h1><p class="muted">Escucha frases pronunciadas por la voz disponible en tu navegador y comprueba cuánto entiendes.</p></div></div>
+        <div class="config-panel"><div class="field"><label for="listenLang">Idioma</label><select id="listenLang"><option value="pt">Português europeu</option><option value="gl">Galego</option></select></div><div class="field"><label for="listenLevel">Nivel</label><select id="listenLevel"></select></div><button class="button button-primary" id="beginListening">Crear ejercicio de listening</button></div>
+        <div class="info-panel"><strong>Nota de audio</strong><p>El audio usa la síntesis de voz del dispositivo si existe una voz compatible. La calidad y disponibilidad de voces de gallego y portugués dependen del navegador y del sistema operativo. No se descarga audio ni se envía nada a un servidor.</p></div>
+      </section>
+      <section class="view" id="view-speaking">
+        <div class="view-heading"><div><p class="eyebrow">Producción oral</p><h1>Speaking / Falar</h1><p class="muted">Lee la consigna, habla en voz alta y practica fluidez, vocabulario y pronunciación.</p></div></div>
+        <div class="config-panel"><div class="field"><label for="speakLang">Idioma</label><select id="speakLang"><option value="pt">Português europeu</option><option value="gl">Galego</option></select></div><div class="field"><label for="speakLevel">Nivel</label><select id="speakLevel"></select></div><button class="button button-primary" id="newSpeaking">Nueva consigna</button></div>
+        <div class="info-panel"><strong>Práctica de voz</strong><p>Si tu navegador lo permite, puedes activar el reconocimiento de voz. Es una función experimental del navegador: puede no estar disponible o requerir conexión y permisos. Si no aparece, lee la consigna en voz alta y marca la práctica como completada. La web no evalúa automáticamente tu acento.</p></div>
+      </section>
+      <section class="view" id="view-progress">
+        <div class="view-heading"><div><p class="eyebrow">Tu camino</p><h1>Mi progreso</h1><p class="muted">Tus resultados, niveles y destrezas. Se guardan en este navegador.</p></div><button class="button button-quiet" id="importProgressBtn">Importar progreso</button><input type="file" id="importFile" accept="application/json" hidden></div>
+        <div class="dashboard-grid progress-languages"><section class="panel"><h2>🇵🇹 Português europeu</h2><div id="ptProgressDetail"></div></section><section class="panel"><h2>🌿 Galego</h2><div id="glProgressDetail"></div></section></div>
+        <section class="panel history-panel"><div class="section-heading"><h2>Historial reciente</h2><button class="text-button danger" id="resetProgress">Borrar progreso</button></div><div id="historyList" class="history-list"><p class="muted">Todavía no hay sesiones.</p></div></section>
+      </section>
+      <section class="activity-panel" id="activityPanel" hidden>
+        <div class="activity-top"><div><p class="eyebrow" id="activityEyebrow">Actividad</p><h2 id="activityTitle">Tu práctica</h2></div><button class="icon-button" id="closeActivity" aria-label="Cerrar actividad">✕</button></div>
+        <div class="activity-meta"><span class="tag" id="activityTag">A1</span><span class="muted small" id="activityCount"></span></div>
+        <div id="activityContent"></div>
+      </section>
+      <footer class="footer">Feito con calma · Hecho para aprender sin prisa. Sin cuentas, sin servidor y sin API de pago.</footer>
+    </main>
+  </div>
+  <nav class="mobile-nav"><button data-view="home">⌂<small>Inicio</small></button><button data-view="practice">▤<small>Ejercicios</small></button><button data-view="exam">✓<small>Exámenes</small></button><button data-view="progress">↗<small>Progreso</small></button></nav>
+</div>
+</body>
+</html>
